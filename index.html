@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>リーダー育成検定（〇×・全17問）</title>
+  <title>リーダー育成検定（〇×・全15問）</title>
   <style>
     :root{
       --bg:#07101f;
@@ -54,7 +54,6 @@
       margin: 0 auto;
       padding: 10px 16px 0;
     }
-
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       border: 1px solid var(--border);
@@ -83,7 +82,6 @@
       font-size: 12px;
       white-space: nowrap;
     }
-
     .progressWrap{
       padding: 12px 14px 8px;
     }
@@ -110,7 +108,6 @@
       gap: 10px;
       flex-wrap: wrap;
     }
-
     .qBody{
       padding: 12px 14px 14px;
     }
@@ -130,7 +127,6 @@
       line-height: 1.8;
       color: var(--text);
     }
-
     .choices{
       margin-top: 14px;
       display:grid;
@@ -149,7 +145,7 @@
       cursor: pointer;
       user-select:none;
       transition: transform .10s ease, background .12s ease, border-color .12s ease;
-      min-height: 56px; /* tap target */
+      min-height: 56px;
     }
     .choiceBtn:active{ transform: scale(.99); }
     .choiceBtn.selected{
@@ -157,15 +153,12 @@
       background: rgba(96,165,250,.14);
       box-shadow: 0 0 0 3px rgba(96,165,250,.18);
     }
-
     .hint{
       margin-top: 10px;
       color: var(--muted);
       font-size: 12px;
       line-height: 1.6;
     }
-
-    /* bottom nav */
     .bottomNav{
       position: fixed;
       left: 0; right: 0; bottom: 0;
@@ -202,7 +195,6 @@
       opacity: .45;
       cursor:not-allowed;
     }
-
     .row{
       display:flex;
       gap: 10px;
@@ -222,8 +214,6 @@
       width: 18px; height: 18px;
       accent-color: var(--accent);
     }
-
-    /* results */
     .resultCard{
       margin-top: 12px;
     }
@@ -257,14 +247,12 @@
     .grade.one{ background: rgba(96,165,250,.14); border-color: rgba(96,165,250,.35); }
     .grade.two{ background: rgba(251,191,36,.12); border-color: rgba(251,191,36,.35); }
     .grade.three{ background: rgba(251,113,133,.10); border-color: rgba(251,113,133,.35); }
-
     .summary{
       margin-top: 10px;
       color: var(--muted);
       font-size: 13px;
       line-height: 1.7;
     }
-
     .review{
       margin-top: 10px;
       display:grid;
@@ -300,7 +288,6 @@
     }
     .mark.ok{ color: var(--good); border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.10); }
     .mark.ng{ color: var(--bad); border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10); }
-
     .detailBody{
       padding: 0 12px 12px;
       color: var(--muted);
@@ -308,7 +295,6 @@
       line-height: 1.75;
     }
     .detailBody b{ color: var(--text); }
-
     .ghostActions{
       display:flex;
       gap: 10px;
@@ -330,7 +316,7 @@
 <body>
   <div class="app">
     <header>
-      <h1>リーダー育成検定（〇×問題・全17問）</h1>
+      <h1>リーダー育成検定（〇×問題・全15問）</h1>
       <div class="sub">1問ずつ回答 → 最後に採点（級判定＋解説）を表示します。未回答は不正解扱いです。</div>
     </header>
 
@@ -343,29 +329,24 @@
 
         <div class="progressWrap">
           <div class="progressBar" aria-label="進捗バー"><div id="bar"></div></div>
-          <div class="progressMeta">
-            <div>現在：<b><span id="pos">1</span></b> / 17</div>
-            <div>回答済み：<b><span id="answered">0</span></b> / 17</div>
-          </div>
+          <div class="progressMeta" id="progressMeta"></div>
 
           <div class="row">
             <label class="toggle">
               <input type="checkbox" id="shuffle" />
               問題順をシャッフル
             </label>
-            <div class="badge" id="saveHint">※この端末内だけで完結（外部送信なし）</div>
+            <div class="badge" id="saveHint">※判定基準：15=特級 / 12-14=1級 / 10-11=2級 / 7-9=3級 / 0-6=4級</div>
           </div>
         </div>
 
-        <div class="qBody" id="qArea">
-          <!-- injected -->
-        </div>
+        <div class="qBody" id="qArea"></div>
       </section>
 
       <section class="card resultCard" id="resultCard" style="display:none;" aria-label="採点結果">
         <div class="cardHd">
           <div class="badge">採点結果</div>
-          <div class="badge">判定基準：17=特級 / 14-16=1級 / 11-13=2級 / 0-10=3級</div>
+          <div class="badge">お疲れ様でした！</div>
         </div>
         <div class="resultBody" id="resultBody"></div>
       </section>
@@ -381,228 +362,34 @@
 
   <script>
     const originalQuestions = [
-      // --- 既存のブラッシュアップ (EQ理論ベース) ---
-      { id: 1, text: "ダニエル・ゴールマンは、IQや専門知識が『門番』のような役割を果たす一方で、優れたリーダーを分ける決定的な要素は自己認識や共感力といった「EQ（感情知能）」であると提唱していますが、これは正しいでしょうか？", answer: true, explain: "IQは仕事への入り口に過ぎず、トップに上り詰める人を分けるのはEQであるとされています。" },
-      { id: 2, text: "「6つのリーダーシップスタイル」において、リーダーは自分の性格に最も合った1つのスタイルを極めることが、組織のパフォーマンスを最大化させる唯一の方法であると説明されていますが、どう思いますか？", answer: false, explain: "優れたリーダーは、ゴルフのクラブを使い分けるように、状況に応じて複数のスタイルを使い分けます。" },
-      { id: 3, text: "目標達成に執着するあまり感情を無視したマネジメントを行うと、短期的には数字が出るかもしれませんが、組織の持続可能性やメンバーの自律性を損なうため、長期的には推奨されないという考えは正しいでしょうか？", answer: true, explain: "感情を無視した運営は、メンバーの燃え尽きや離職を招き、組織を脆弱にします。" },
-      { id: 4, text: "「ビジョン型」リーダーは、明確な目的を語ることでメンバーの意欲を高める長所がありますが、具体的な行動指針や実行力が伴わない場合、単なる「空想家」として信頼を失うリスクを孕んでいるでしょうか？", answer: true, explain: "方向性を示すだけでなく、それが現実的なステップとして機能しているかが重要です。" },
-      { id: 5, text: "「コーチ型」は個人の長所に焦点を当て、長期的な成長を促すのに非常に有効な手法ですが、一分一秒を争うような緊急事態や、即効性が求められる場面では、その効果が十分に発揮されないという側面があるでしょうか？", answer: true, explain: "育成には時間がかかるため、危機の真っ只中では他のスタイル（強制型など）との併用が必要です。" },
-      { id: 6, text: "「関係重視型」のリーダーは、チームの調和を保ち心理的安全性を高めるのが得意ですが、和を重んじるあまり、パフォーマンスの低いメンバーに対して厳しいフィードバックを行うことが遅れる弊害があるでしょうか？", answer: true, explain: "優しさが「甘さ」に変わると、組織全体の規律が乱れるリスクがあります。" },
-      { id: 7, text: "「民主型」のリーダーシップは、全員の意見を吸い上げることで納得感と帰属意識を高めますが、迅速かつ果断な意思決定が求められる局面において、最も高い成果を発揮するスタイルと言えるでしょうか？", answer: false, explain: "民主型は合意形成に時間がかかるため、スピードが命の場面では不向きです。" },
-      { id: 8, text: "リーダーが自ら高い基準を示して牽引する「率先型」は、優秀なチームでは爆発的な成果を生みますが、リーダーに依存しすぎて部下の主体性が育たなくなったり、周囲が疲弊したりする副作用があるでしょうか？", answer: true, explain: "「自分でやったほうが早い」が続くと、組織としての成長が止まってしまいます。" },
-      { id: 9, text: "「強制型（指示命令型）」は現代では敬遠されがちですが、組織が深刻な危機に瀕している場合や、一刻を争うトラブル対応が必要な場面においては、最も効果的で強力な手段になり得るでしょうか？", answer: true, explain: "火事の現場で合議制は取れません。危機管理においては必須のスタイルです。" },
-      { id: 10, text: "最も優れたリーダーは、平時と危機、組織の成長フェーズ、あるいは向き合う個人の特性という「状況」に応じて、これら複数のスタイルを柔軟に使い分けていると言えるでしょうか？", answer: true, explain: "単一のスタイルに固執せず、状況というキャンバスに最適な色を塗るのが真のリーダーです。" },
-
-      // --- 新規追加分 (JC・LOM・アカデミー関連) ---
-      { id: 11, text: "日本青年会議所の各協議会は、LOMの活動とは切り離された独立した組織として活動すべきであり、LOMの運営には干渉しない関係が理想であるとされていますが、正しいでしょうか？", answer: false, explain: "協議会での学びやネットワークは、最終的にLOM（各地会員会議所）へ還元されるべきものです。" },
-      { id: 12, text: "アカデミー事業で得られる高い熱量やリーダーシップの学びは、出向者個人の成長に留まらず、その熱がLOM全体へ波及していくことで組織の活性化につながると説明されていますが、どう思いますか？", answer: true, explain: "個人の変容が周囲を巻き込み、LOM全体の運動の質を高める起点となります。" },
-      { id: 13, text: "地域のリーダーを育成する上では、LOM内だけの研修や活動で完結する人財育成プログラムを構築することが、最も重要かつ効率的な手法であるとされていますが、正しいでしょうか？", answer: false, explain: "外部（出向等）での多様な経験や視点を取り入れることが、真に強いリーダーを育てます。" },
-      { id: 14, text: "協議会やブロック、地区への出向は、日常のルーティンを超えた「リーダー輩出の機会」であり、多様な価値観に触れることで自己の殻を破るチャンスとして紹介されているでしょうか？", answer: true, explain: "アウェイな環境での経験こそが、リーダーとしての器を大きく広げます。" },
-      { id: 15, text: "東北地区のリーダー育成においては、歴史ある「ゼミナール制度」が特徴として挙げられ、深い対話と研鑽を通じて次代のリーダーを育てていると紹介されていますが、これは正しいでしょうか？", answer: true, explain: "ゼミナール制は東北地区の伝統的な強みであり、強固な繋がりを育む文化です。" },
-      { id: 16, text: "愛知ブロックにおいては、メンバー同士の「接触頻度」を戦略的に高めることで、信頼関係の構築を加速させ、より強固なメンバー育成を実現していると説明されているでしょうか？", answer: true, explain: "単純接触回数は信頼に比例します。高頻度の交流が強固な結束を生みます。" },
-      { id: 17, text: "本セミナー（フォーラム）では、知識の習得だけでなく「失敗を恐れず挑戦する姿勢」そのものを大切にしており、そのマインドセットこそがリーダーの原点であると説いているでしょうか？", answer: true, explain: "完璧を目指すことより、まず一歩を踏み出し、失敗から学ぶ姿勢が重要です。" }
+      { id: 1, text: "ダニエル・ゴールマンは、IQや専門知識が『門番』のような役割を果たす一方で、優れたリーダーを分ける決定的な要素は自己認識や共感力といった「EQ（感情知能）」であると提唱していますが、これは理論として正しいでしょうか？", answer: true, explain: "IQは仕事への入り口に過ぎず、トップに上り詰める人を分けるのはEQであるとされています。" },
+      { id: 2, text: "目標達成に執着するあまり感情を無視したマネジメントを行うと、短期的には数字が出るかもしれませんが、長期的には組織の持続可能性を損なうリスクがあるという考えは、理論的に正しいでしょうか？", answer: true, explain: "感情を無視した運営は、メンバーの燃え尽きや離職を招き、組織を脆弱にします。" },
+      { id: 3, text: "「ビジョン型」リーダーは、明確な目的を語ることでメンバーの意欲を高める長所がありますが、具体的な行動指針や実行力が伴わない場合、単なる「空想家」として信頼を失うリスクを孕んでいるでしょうか？", answer: true, explain: "方向性を示すだけでなく、それが現実的なステップとして機能しているかが重要です。" },
+      { id: 4, text: "「コーチ型」は個人の長所に焦点を当て、長期的な成長を促すのに非常に有効な手法ですが、一分一秒を争うような緊急事態や即効性が求められる場面では、その効果に限界があるでしょうか？", answer: true, explain: "育成には時間がかかるため、危機の真っ只中では他のスタイル（強制型など）との併用が必要です。" },
+      { id: 5, text: "「関係重視型」のリーダーは、チームの調和を保ち心理的安全性を高めるのが得意ですが、和を重んじるあまり、パフォーマンスの低いメンバーに対して適切なフィードバックを行うことが遅れる弊害があるでしょうか？", answer: true, explain: "優しさが「甘さ」に変わると、組織全体の規律が乱れるリスクがあります。" },
+      { id: 6, text: "「民主型」のリーダーシップは、全員の意見を吸い上げることで納得感と帰属意識を高めますが、迅速かつ果断な意思決定が求められる局面において、最も高い成果を発揮するスタイルと言えるでしょうか？", answer: false, explain: "民主型は合意形成に時間がかかるため、スピードが命の場面では不向きです。" },
+      { id: 7, text: "リーダーが自ら高い基準を示して牽引する「率先型」は、優秀なチームでは爆発的な成果を生みますが、リーダーに依存しすぎて部下の主体性が育たなくなったり、周囲が疲弊したりする副作用があるでしょうか？", answer: true, explain: "「自分でやったほうが早い」が続くと、組織としての成長が止まってしまいます。" },
+      { id: 8, text: "「強制型（指示命令型）」は現代では敬遠されがちですが、組織が深刻な危機に瀕している場合や、一刻を争うトラブル対応が必要な場面においては、最も効果的で強力な手段になり得るでしょうか？", answer: true, explain: "火事の現場で合議制は取れません。危機管理においては必須のスタイルです。" },
+      { id: 9, text: "最も優れたリーダーは、特定の性格や一つのスタイルに固執せず、平時と危機、組織のフェーズや向き合う個人の特性という「状況」に応じて、複数のスタイルを柔軟に使い分けているでしょうか？", answer: true, explain: "一つの型に縛られず、状況というキャンバスに最適なスタイルを適用するのが真のリーダーです。" },
+      { id: 10, text: "地区やブロックの各委員会は、LOMの活動とは切り離された独立した組織として活動すべきであり、LOMの運営には干渉しない関係が理想であるとされていますが、これは正しいでしょうか？", answer: false, explain: "地区やブロックでの学びやネットワークは、最終的にLOM（各地会員会議所）へ還元されるべきものです。" },
+      { id: 11, text: "アカデミー事業で培われる「挑戦する姿勢」やリーダーシップの学びは、出向者個人の成長に留まらず、その熱量がLOM全体へ波及することで、組織文化の活性化や変革の起点になるとされていますが、これは正しいでしょうか？", answer: true, explain: "個人の変容と挑戦するマインドセットが、LOM全体の運動の質を高める起点となります。" },
+      { id: 12, text: "地域のリーダーを育成する上では、LOM内だけの研修や活動で完結する人財育成プログラムを構築することが、最も重要かつ効率的な手法であるとされていますが、これは正しいでしょうか？", answer: false, explain: "外部（出向等）での多様な経験や視点を取り入れることが、真に強いリーダーを育てます。" },
+      { id: 13, text: "地区やブロックへの出向は、日常のルーティンを超えた「リーダー輩出の機会」であり、多様な価値観に触れることで自己の殻を破るチャンスとして紹介されているでしょうか？", answer: true, explain: "アウェイな環境での経験こそが、リーダーとしての器を大きく広げます。" },
+      { id: 14, text: "東北地区のリーダー育成においては、歴史ある「ゼミナール制度」が特徴として挙げられ、深い対話と研鑽を通じて次代のリーダーを育てていると紹介されていますが、これは正しいでしょうか？", answer: true, explain: "ゼミナール制は東北地区の伝統的な強みであり、強固な繋がりを育む文化です。" },
+      { id: 15, text: "愛知ブロックにおいては、メンバー同士の「接触頻度」を戦略的に高めることで、信頼関係の構築を加速させ、より強固なメンバー育成を実現していると説明されているでしょうか？", answer: true, explain: "単純接触回数は信頼に比例します。高頻度の交流が強固な結束を生みます。" }
     ];
 
-    let questions = [...originalQuestions]; // may shuffle
-    let idx = 0; // 0..9
-    const answers = new Map(); // id -> true/false
+    let questions = [...originalQuestions];
+    let idx = 0;
+    const answers = new Map();
 
     const qArea = document.getElementById("qArea");
-    const posEl = document.getElementById("pos");
-    const answeredEl = document.getElementById("answered");
     const barEl = document.getElementById("bar");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const shuffleEl = document.getElementById("shuffle");
     const modeBadge = document.getElementById("modeBadge");
+    const progressMeta = document.getElementById("progressMeta");
 
     const resultCard = document.getElementById("resultCard");
-    const resultBody = document.getElementById("resultBody");
-
-    function shuffle(array){
-      for(let i=array.length-1;i>0;i--){
-        const j = Math.floor(Math.random()*(i+1));
-        [array[i],array[j]]=[array[j],array[i]];
-      }
-      return array;
-    }
-
-    function gradeByScore(score){
-      if(score === 17) return { label:"【特級】エグゼクティブ・リーダー", cls:"special", msg:"リーダーシップの本質を完璧に捉えています。この高い視座を組織全体に浸透させ、さらなる高みを目指す強固な組織を構築するために、LOMメンバーをアカデミーに出向させよう！" };
-      if(score >= 14) return { label:"【1級】戦略的リーダー", cls:"one", msg:"状況に応じた卓越した判断力をお持ちです。あなたの戦略を具現化し、共に組織を牽引する強力な次世代リーダーを育成するため、LOMメンバーをアカデミーに出向させよう！" };
-      if(score >= 11) return { label:"【2級】チームリーダー", cls:"two", msg:"リーダーとしての土台がしっかり築かれています。個人の力から組織の力へとシフトし、チーム全体のポテンシャルを最大限に引き出す環境を作るため、LOMメンバーをアカデミーに出向させよう！" };
-      return { label:"【3級】リーダー候補生", cls:"three", msg:"大きな成長の可能性を秘めています。まずは組織としての共通言語を学び、チーム一丸となって変革の一歩を踏み出すきっかけを作るため、LOMメンバーをアカデミーに出向させよう！" };
-    }
-
-    function updateProgress(){
-      posEl.textContent = (idx + 1);
-      answeredEl.textContent = answers.size;
-      const pct = Math.round(((idx+1) / 17) * 100);
-      barEl.style.width = pct + "%";
-
-      prevBtn.disabled = (idx === 0);
-
-      if(idx < 16){
-        nextBtn.textContent = "次へ";
-      }else{
-        nextBtn.textContent = "採点する";
-      }
-    }
-
-    function renderQuestion(){
-      const q = questions[idx];
-      const ua = answers.has(q.id) ? answers.get(q.id) : null;
-
-      qArea.innerHTML = `
-        <div class="qNo">
-          <div>問題${q.id}</div>
-          <div class="badge">あなたの回答：<b style="color:var(--text)">${ua === null ? "未回答" : (ua ? "〇" : "×")}</b></div>
-        </div>
-        <p class="qText">${q.text}</p>
-
-        <div class="choices" role="group" aria-label="問題${q.id}の回答">
-          <button class="choiceBtn" data-v="true">〇</button>
-          <button class="choiceBtn" data-v="false">×</button>
-        </div>
-
-        <div class="hint">ヒント：迷ったら一旦選んでOK（あとで「戻る」で変更できます）。</div>
-      `;
-
-      // bind
-      qArea.querySelectorAll(".choiceBtn").forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          const v = btn.getAttribute("data-v") === "true";
-          answers.set(q.id, v);
-
-          qArea.querySelectorAll(".choiceBtn").forEach(b=>b.classList.remove("selected"));
-          btn.classList.add("selected");
-
-          // update top badge
-          const badge = qArea.querySelector(".qNo .badge b");
-          badge.textContent = v ? "〇" : "×";
-
-          updateProgress();
-        });
-      });
-
-      // restore selected
-      if(ua !== null){
-        const selected = qArea.querySelector(`.choiceBtn[data-v="${ua}"]`);
-        if(selected) selected.classList.add("selected");
-      }
-
-      updateProgress();
-    }
-
-    function showResults(){
-      // score
-      let correct = 0;
-      const details = originalQuestions.map(q=>{
-        const ua = answers.has(q.id) ? answers.get(q.id) : null;
-        const ok = (ua !== null) && (ua === q.answer);
-        if(ok) correct++;
-        return { ...q, userAnswer: ua, ok };
-      });
-
-      const g = gradeByScore(correct);
-
-      resultCard.style.display = "block";
-      resultBody.innerHTML = `
-        <div class="scoreLine">
-          <div class="score">${correct}<span style="font-size:14px; font-weight:900; color:var(--muted)"> / 17</span></div>
-          <div class="grade ${g.cls}">${g.label}</div>
-        </div>
-        <div class="summary">${g.msg}</div>
-
-        <div class="ghostActions">
-          <button class="ghostBtn" id="retryBtn">最初からやり直す</button>
-          <button class="ghostBtn" id="jumpTopBtn">先頭（問題1）へ</button>
-        </div>
-
-        <div class="review" aria-label="解説レビュー">
-          ${details.map(d=>{
-            const statusCls = d.ok ? "ok" : "ng";
-            // 間違えた問題はデフォルトで開いておく (open属性)
-            const isOpen = d.ok ? "" : "open"; 
-            
-            return `
-              <details ${isOpen}>
-                <summary>
-                  <span>問題${d.id}</span>
-                  <span class="mark ${statusCls}">${d.ok ? "正解" : "要チェック"}</span>
-                </summary>
-                <div class="detailBody">
-                  <div style="margin-bottom:8px;">${d.text}</div>
-                  <div>あなたの回答：<b>${d.userAnswer === null ? "未回答" : (d.userAnswer ? "〇" : "×")}</b> ／ 正解：<b>${d.answer ? "〇" : "×"}</b></div>
-                  <div style="margin-top:12px; padding:10px; background:rgba(255,255,255,0.05); border-radius:8px;">
-                    <b style="color:var(--accent)">【解説】</b><br>${d.explain}
-                  </div>
-                </div>
-              </details>
-            `;
-          }).join("")}
-        </div>
-      `;
-
-      // actions
-      document.getElementById("retryBtn").addEventListener("click", resetAll);
-      document.getElementById("jumpTopBtn").addEventListener("click", ()=>{
-        idx = 0;
-        resultCard.style.display = "none";
-        renderQuestion();
-        window.scrollTo({top:0, behavior:"smooth"});
-      });
-
-      // scroll
-      resultCard.scrollIntoView({behavior:"smooth", block:"start"});
-    }
-
-    function resetAll(){
-      answers.clear();
-      idx = 0;
-      resultCard.style.display = "none";
-      renderQuestion();
-      window.scrollTo({top:0, behavior:"smooth"});
-    }
-
-    prevBtn.addEventListener("click", ()=>{
-      if(idx > 0){
-        idx--;
-        resultCard.style.display = "none";
-        renderQuestion();
-        window.scrollTo({top:0, behavior:"smooth"});
-      }
-    });
-
-    nextBtn.addEventListener("click", ()=>{
-      if(idx < 16){
-        idx++;
-        resultCard.style.display = "none";
-        renderQuestion();
-        window.scrollTo({top:0, behavior:"smooth"});
-      }else{
-        // last -> score
-        showResults();
-      }
-    });
-
-    shuffleEl.addEventListener("change", ()=>{
-      // Keep answers by question id; only reorder display.
-      questions = [...originalQuestions];
-      if(shuffleEl.checked){
-        shuffle(questions);
-        modeBadge.textContent = "出題：シャッフル";
-      }else{
-        modeBadge.textContent = "出題：固定順";
-      }
-      idx = 0;
-      resultCard.style.display = "none";
-      renderQuestion();
-      window.scrollTo({top:0, behavior:"smooth"});
-    });
-
-    // initial
-    renderQuestion();
-  </script>
-</body>
-</html>
+    const resultBody = document
