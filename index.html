@@ -8,14 +8,12 @@
     :root{
       --bg:#07101f;
       --card:#0d1930;
-      --card2:#0b1427;
       --text:#eaf0ff;
       --muted:#a7b4d0;
       --border: rgba(255,255,255,.12);
       --accent:#60a5fa;
       --good:#34d399;
       --bad:#fb7185;
-      --warn:#fbbf24;
       --shadow: 0 14px 40px rgba(0,0,0,.35);
       --radius: 18px;
     }
@@ -39,21 +37,9 @@
       max-width: 920px;
       margin: 0 auto;
     }
-    h1{
-      margin: 0 0 6px;
-      font-size: 18px;
-      letter-spacing: .2px;
-    }
-    .sub{
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-    .container{
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 10px 16px 0;
-    }
+    h1{ margin: 0 0 6px; font-size: 18px; letter-spacing: .2px; }
+    .sub{ color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .container{ max-width: 920px; margin: 0 auto; padding: 10px 16px 0; }
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       border: 1px solid var(--border);
@@ -62,288 +48,84 @@
       overflow:hidden;
     }
     .cardHd{
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      gap: 12px;
-      padding: 12px 14px;
-      background: rgba(255,255,255,.03);
-      border-bottom: 1px solid var(--border);
+      display:flex; justify-content: space-between; align-items:center; gap: 12px;
+      padding: 12px 14px; background: rgba(255,255,255,.03); border-bottom: 1px solid var(--border);
     }
     .badge{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 6px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(7,16,31,.25);
-      font-size: 12px;
-      white-space: nowrap;
+      display:inline-flex; align-items:center; gap: 8px; padding: 6px 10px;
+      border: 1px solid var(--border); border-radius: 999px; color: var(--muted);
+      background: rgba(7,16,31,.25); font-size: 12px; white-space: nowrap;
     }
-    .progressWrap{
-      padding: 12px 14px 8px;
-    }
-    .progressBar{
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .progressBar > div{
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, rgba(96,165,250,.95), rgba(52,211,153,.90));
-      transition: width .25s ease;
-    }
-    .progressMeta{
-      display:flex;
-      justify-content: space-between;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.4;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .qBody{
-      padding: 12px 14px 14px;
-    }
-    .qNo{
-      font-weight: 900;
-      font-size: 14px;
-      letter-spacing: .3px;
-      margin-bottom: 8px;
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .qText{
-      margin: 0;
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--text);
-    }
-    .choices{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+    .progressWrap{ padding: 12px 14px 8px; }
+    .progressBar{ height: 10px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid var(--border); overflow: hidden; }
+    .progressBar > div{ height: 100%; width: 0%; background: linear-gradient(90deg, rgba(96,165,250,.95), rgba(52,211,153,.90)); transition: width .25s ease; }
+    .progressMeta{ display:flex; justify-content: space-between; margin-top: 8px; color: var(--muted); font-size: 12px; }
+    .qBody{ padding: 12px 14px 14px; }
+    .qNo{ font-weight: 900; font-size: 14px; margin-bottom: 8px; display:flex; align-items:center; justify-content: space-between; }
+    .qText{ margin: 0; font-size: 16px; line-height: 1.8; color: var(--text); }
+    .choices{ margin-top: 14px; display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .choiceBtn{
-      width:100%;
-      padding: 16px 14px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      font-weight: 900;
-      font-size: 18px;
-      cursor: pointer;
-      user-select:none;
-      transition: transform .10s ease, background .12s ease, border-color .12s ease;
-      min-height: 56px;
+      width:100%; padding: 16px 14px; border-radius: 16px; border: 1px solid var(--border);
+      background: rgba(255,255,255,.04); color: var(--text); font-weight: 900; font-size: 18px; cursor: pointer;
     }
-    .choiceBtn:active{ transform: scale(.99); }
-    .choiceBtn.selected{
-      border-color: rgba(96,165,250,.75);
-      background: rgba(96,165,250,.14);
-      box-shadow: 0 0 0 3px rgba(96,165,250,.18);
-    }
-    .hint{
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-    }
+    .choiceBtn.selected{ border-color: rgba(96,165,250,.75); background: rgba(96,165,250,.14); }
     .bottomNav{
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
+      position: fixed; left: 0; right: 0; bottom: 0;
       padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-      background: rgba(7,16,31,.78);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid var(--border);
+      background: rgba(7,16,31,.78); backdrop-filter: blur(10px); border-top: 1px solid var(--border);
     }
-    .bottomInner{
-      max-width: 920px;
-      margin: 0 auto;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .navBtn{
-      width:100%;
-      padding: 14px 12px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      font-weight: 900;
-      font-size: 15px;
-      cursor:pointer;
-      min-height: 54px;
-    }
-    .navBtn.primary{
-      border: 0;
-      color: #061021;
-      background: linear-gradient(90deg, rgba(96,165,250,.95), rgba(52,211,153,.90));
-    }
-    .navBtn:disabled{
-      opacity: .45;
-      cursor:not-allowed;
-    }
-    .row{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items:center;
-      justify-content: space-between;
-      margin-top: 12px;
-    }
-    .toggle{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    input[type="checkbox"]{
-      width: 18px; height: 18px;
-      accent-color: var(--accent);
-    }
-    .resultCard{
-      margin-top: 12px;
-    }
-    .resultBody{
-      padding: 14px;
-    }
-    .scoreLine{
-      display:flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .score{
-      font-size: 34px;
-      font-weight: 1000;
-      letter-spacing: .6px;
-    }
-    .grade{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      font-weight: 900;
-      font-size: 13px;
-    }
+    .bottomInner{ max-width: 920px; margin: 0 auto; display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .navBtn{ width:100%; padding: 14px 12px; border-radius: 16px; border: 1px solid var(--border); background: rgba(255,255,255,.04); color: var(--text); font-weight: 900; font-size: 15px; cursor:pointer; }
+    .navBtn.primary{ border: 0; color: #061021; background: linear-gradient(90deg, rgba(96,165,250,.95), rgba(52,211,153,.90)); }
+    .navBtn:disabled{ opacity: .45; }
+    .resultBody{ padding: 14px; }
+    .scoreLine{ display:flex; align-items: baseline; justify-content: space-between; margin-bottom: 15px; }
+    .score{ font-size: 34px; font-weight: 1000; }
+    .grade{ padding: 7px 12px; border-radius: 999px; border: 1px solid var(--border); font-weight: 900; font-size: 13px; }
     .grade.special{ background: rgba(52,211,153,.14); border-color: rgba(52,211,153,.35); }
-    .grade.one{ background: rgba(96,165,250,.14); border-color: rgba(96,165,250,.35); }
-    .grade.two{ background: rgba(251,191,36,.12); border-color: rgba(251,191,36,.35); }
-    .grade.three{ background: rgba(251,113,133,.10); border-color: rgba(251,113,133,.35); }
-    .summary{
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-    .review{
-      margin-top: 10px;
-      display:grid;
-      gap: 10px;
-    }
-    details{
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: rgba(11,20,39,.35);
-      overflow:hidden;
-    }
-    summary{
-      cursor:pointer;
-      padding: 12px 12px;
-      list-style: none;
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 12px;
+    .summary{ color: #7dd3fc; font-size: 18px; line-height: 1.8; margin-bottom: 20px; font-weight: 600; border: 2px solid rgba(255,255,255,.3); padding: 16px; border-radius: 12px; background: rgba(96,165,250,.08); -webkit-text-stroke: 0.5px rgba(255,255,255,.5); text-shadow: 0 0 10px rgba(96,165,250,.3); }
+    .highlight{ 
+      background: linear-gradient(90deg, #ff6b6b, #ffa500, #ffd700, #ff69b4, #ff6b6b);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
       font-weight: 900;
-      font-size: 13px;
-      color: var(--text);
+      font-size: 1.2em;
+      animation: rainbow-flow 2s linear infinite;
     }
-    summary::-webkit-details-marker{ display:none; }
-    .mark{
-      font-weight: 1000;
-      font-size: 12px;
-      padding: 5px 9px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.03);
-      white-space: nowrap;
+    @keyframes rainbow-flow {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
     }
-    .mark.ok{ color: var(--good); border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.10); }
-    .mark.ng{ color: var(--bad); border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10); }
-    .detailBody{
-      padding: 0 12px 12px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.75;
-    }
-    .detailBody b{ color: var(--text); }
-    .ghostActions{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-    .ghostBtn{
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      font-weight: 900;
-      font-size: 13px;
-      cursor:pointer;
-    }
+    details{ border: 1px solid var(--border); border-radius: 16px; background: rgba(11,20,39,.35); margin-bottom: 10px; }
+    summary{ cursor:pointer; padding: 12px; display:flex; justify-content: space-between; font-weight: 900; font-size: 13px; list-style: none; }
+    .mark.ok{ color: var(--good); } .mark.ng{ color: var(--bad); }
+    .detailBody{ padding: 0 12px 12px; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .ghostBtn{ padding: 12px; border-radius: 14px; border: 1px solid var(--border); background: transparent; color: var(--text); font-weight: 900; font-size: 13px; cursor:pointer; margin-right: 8px; }
   </style>
 </head>
 <body>
   <div class="app">
-    <header>
-      <h1>リーダー育成検定（〇×問題・全15問）</h1>
-      <div class="sub">1問ずつ回答 → 最後に採点（級判定＋解説）を表示します。未回答は不正解扱いです。</div>
+    <header id="appHeader">
+      <h1>リーダー育成検定（全15問）</h1>
+      <div class="sub">1問ずつ回答 → 最後に採点します。</div>
     </header>
 
     <main class="container">
-      <section class="card" aria-label="クイズ本体">
+      <section class="card" id="quizSection">
         <div class="cardHd">
           <div class="badge" id="modeBadge">出題：固定順</div>
           <div class="badge">形式：〇×</div>
         </div>
-
         <div class="progressWrap">
-          <div class="progressBar" aria-label="進捗バー"><div id="bar"></div></div>
+          <div class="progressBar"><div id="bar"></div></div>
           <div class="progressMeta" id="progressMeta"></div>
-
-          <div class="row">
-            <label class="toggle">
-              <input type="checkbox" id="shuffle" />
-              問題順をシャッフル
-            </label>
-            <div class="badge" id="saveHint">※判定基準：15=特級 / 12-14=1級 / 10-11=2級 / 7-9=3級 / 0-6=4級</div>
-          </div>
         </div>
-
         <div class="qBody" id="qArea"></div>
       </section>
 
-      <section class="card resultCard" id="resultCard" style="display:none;" aria-label="採点結果">
+      <section class="card" id="resultSection" style="display:none;">
         <div class="cardHd">
           <div class="badge">採点結果</div>
           <div class="badge">お疲れ様でした！</div>
@@ -353,7 +135,7 @@
     </main>
   </div>
 
-  <nav class="bottomNav" aria-label="操作">
+  <nav class="bottomNav" id="navArea">
     <div class="bottomInner">
       <button class="navBtn" id="prevBtn">戻る</button>
       <button class="navBtn primary" id="nextBtn">次へ</button>
@@ -361,35 +143,97 @@
   </nav>
 
   <script>
-    const originalQuestions = [
-      { id: 1, text: "ダニエル・ゴールマンは、IQや専門知識が『門番』のような役割を果たす一方で、優れたリーダーを分ける決定的な要素は自己認識や共感力といった「EQ（感情知能）」であると提唱していますが、これは理論として正しいでしょうか？", answer: true, explain: "IQは仕事への入り口に過ぎず、トップに上り詰める人を分けるのはEQであるとされています。" },
-      { id: 2, text: "目標達成に執着するあまり感情を無視したマネジメントを行うと、短期的には数字が出るかもしれませんが、長期的には組織の持続可能性を損なうリスクがあるという考えは、理論的に正しいでしょうか？", answer: true, explain: "感情を無視した運営は、メンバーの燃え尽きや離職を招き、組織を脆弱にします。" },
-      { id: 3, text: "「ビジョン型」リーダーは、明確な目的を語ることでメンバーの意欲を高める長所がありますが、具体的な行動指針や実行力が伴わない場合、単なる「空想家」として信頼を失うリスクを孕んでいるでしょうか？", answer: true, explain: "方向性を示すだけでなく、それが現実的なステップとして機能しているかが重要です。" },
-      { id: 4, text: "「コーチ型」は個人の長所に焦点を当て、長期的な成長を促すのに非常に有効な手法ですが、一分一秒を争うような緊急事態や即効性が求められる場面では、その効果に限界があるでしょうか？", answer: true, explain: "育成には時間がかかるため、危機の真っ只中では他のスタイル（強制型など）との併用が必要です。" },
-      { id: 5, text: "「関係重視型」のリーダーは、チームの調和を保ち心理的安全性を高めるのが得意ですが、和を重んじるあまり、パフォーマンスの低いメンバーに対して適切なフィードバックを行うことが遅れる弊害があるでしょうか？", answer: true, explain: "優しさが「甘さ」に変わると、組織全体の規律が乱れるリスクがあります。" },
-      { id: 6, text: "「民主型」のリーダーシップは、全員の意見を吸い上げることで納得感と帰属意識を高めますが、迅速かつ果断な意思決定が求められる局面において、最も高い成果を発揮するスタイルと言えるでしょうか？", answer: false, explain: "民主型は合意形成に時間がかかるため、スピードが命の場面では不向きです。" },
-      { id: 7, text: "リーダーが自ら高い基準を示して牽引する「率先型」は、優秀なチームでは爆発的な成果を生みますが、リーダーに依存しすぎて部下の主体性が育たなくなったり、周囲が疲弊したりする副作用があるでしょうか？", answer: true, explain: "「自分でやったほうが早い」が続くと、組織としての成長が止まってしまいます。" },
-      { id: 8, text: "「強制型（指示命令型）」は現代では敬遠されがちですが、組織が深刻な危機に瀕している場合や、一刻を争うトラブル対応が必要な場面においては、最も効果的で強力な手段になり得るでしょうか？", answer: true, explain: "火事の現場で合議制は取れません。危機管理においては必須のスタイルです。" },
-      { id: 9, text: "最も優れたリーダーは、特定の性格や一つのスタイルに固執せず、平時と危機、組織のフェーズや向き合う個人の特性という「状況」に応じて、複数のスタイルを柔軟に使い分けているでしょうか？", answer: true, explain: "一つの型に縛られず、状況というキャンバスに最適なスタイルを適用するのが真のリーダーです。" },
-      { id: 10, text: "地区やブロックの各委員会は、LOMの活動とは切り離された独立した組織として活動すべきであり、LOMの運営には干渉しない関係が理想であるとされていますが、これは正しいでしょうか？", answer: false, explain: "地区やブロックでの学びやネットワークは、最終的にLOM（各地会員会議所）へ還元されるべきものです。" },
-      { id: 11, text: "アカデミー事業で培われる「挑戦する姿勢」やリーダーシップの学びは、出向者個人の成長に留まらず、その熱量がLOM全体へ波及することで、組織文化の活性化や変革の起点になるとされていますが、これは正しいでしょうか？", answer: true, explain: "個人の変容と挑戦するマインドセットが、LOM全体の運動の質を高める起点となります。" },
-      { id: 12, text: "地域のリーダーを育成する上では、LOM内だけの研修や活動で完結する人財育成プログラムを構築することが、最も重要かつ効率的な手法であるとされていますが、これは正しいでしょうか？", answer: false, explain: "外部（出向等）での多様な経験や視点を取り入れることが、真に強いリーダーを育てます。" },
-      { id: 13, text: "地区やブロックへの出向は、日常のルーティンを超えた「リーダー輩出の機会」であり、多様な価値観に触れることで自己の殻を破るチャンスとして紹介されているでしょうか？", answer: true, explain: "アウェイな環境での経験こそが、リーダーとしての器を大きく広げます。" },
-      { id: 14, text: "東北地区のリーダー育成においては、歴史ある「ゼミナール制度」が特徴として挙げられ、深い対話と研鑽を通じて次代のリーダーを育てていると紹介されていますが、これは正しいでしょうか？", answer: true, explain: "ゼミナール制は東北地区の伝統的な強みであり、強固な繋がりを育む文化です。" },
-      { id: 15, text: "愛知ブロックにおいては、メンバー同士の「接触頻度」を戦略的に高めることで、信頼関係の構築を加速させ、より強固なメンバー育成を実現していると説明されているでしょうか？", answer: true, explain: "単純接触回数は信頼に比例します。高頻度の交流が強固な結束を生みます。" }
+    const questions = [
+      { id: 1, text: "ダニエル・ゴールマンは、優れたリーダーを分ける決定的な要素は「EQ（感情知能）」であると提唱しているか？", answer: true, explain: "IQは仕事への入り口に過ぎず、トップを分けるのはEQであるとされています。" },
+      { id: 2, text: "目標達成に執着するあまり感情を無視すると、長期的には組織の持続可能性を損なうリスクがあるか？", answer: true, explain: "感情を無視した運営は燃え尽きや離職を招き、組織を脆弱にします。" },
+      { id: 3, text: "「ビジョン型」リーダーは、具体的な行動指針が伴わない場合、単なる「空想家」として信頼を失うリスクがあるか？", answer: true, explain: "方向性を示すだけでなく、現実的なステップとして機能させることが重要です。" },
+      { id: 4, text: "「コーチ型」は長期的な成長を促すのに有効だが、緊急事態や即効性が求められる場面では効果に限界があるか？", answer: true, explain: "育成には時間がかかるため、危機の真っ只中では指示命令との併用が必要です。" },
+      { id: 5, text: "「関係重視型」リーダーは、和を重んじるあまり、適切なフィードバックを行うことが遅れる弊害があるか？", answer: true, explain: "優しさが「甘さ」に変わると、組織全体の規律が乱れるリスクがあります。" },
+      { id: 6, text: "「民主型」は、迅速かつ果断な意思決定が求められる局面において、最も高い成果を発揮するスタイルと言えるか？", answer: false, explain: "民主型は合意形成に時間がかかるため、スピードが命の場面では不向きです。" },
+      { id: 7, text: "「率先型」は、優秀なチームでは成果を生むが、リーダーに依存しすぎて部下の主体性が育たなくなる副作用があるか？", answer: true, explain: "「自分でやったほうが早い」が続くと、組織としての成長が止まってしまいます。" },
+      { id: 8, text: "「強制型（指示命令型）」は、深刻な危機に瀕している場合や一刻を争う場面では、最も効果的な手段になり得るか？", answer: true, explain: "火事の現場で合議制は取れません。危機管理においては必須のスタイルです。" },
+      { id: 9, text: "優れたリーダーは、特定のスタイルに固執せず、状況に応じて複数のスタイルを柔軟に使い分けているか？", answer: true, explain: "状況というキャンバスに最適なスタイルを適用するのが真のリーダーです。" },
+      { id: 10, text: "地区やブロックの委員会は、LOMの活動とは切り離された独立した組織として活動すべきであるか？", answer: false, explain: "地区・ブロックでの学びは、最終的にLOMへ還元されるべきものです。" },
+      { id: 11, text: "アカデミー事業で培われる学びは、出向者個人の成長に留まらず、LOM全体へ波及し変革の起点となるか？", answer: true, explain: "個人の変容がLOM全体の運動の質を高める起点となります。" },
+      { id: 12, text: "地域のリーダー育成には、LOM内だけの活動で完結するプログラムを構築することが最も効率的か？", answer: false, explain: "外部（出向等）での多様な経験や視点を取り入れることが、強いリーダーを育てます。" },
+      { id: 13, text: "地区やブロックへの出向は、多様な価値観に触れることで自己の殻を破るチャンスであるか？", answer: true, explain: "アウェイな環境での経験こそが、リーダーとしての器を広げます。" },
+      { id: 14, text: "東北地区には、深い対話と研鑽を通じてリーダーを育てる伝統的な「ゼミナール制度」があるか？", answer: true, explain: "ゼミナール制は東北の伝統的な強みであり、強固な繋がりを育む文化です。" },
+      { id: 15, text: "愛知ブロックでは、「接触頻度」を高めることで信頼関係を加速させ、より強固な育成を実現しているか？", answer: true, explain: "高頻度の交流が強固な結束を生みます。" }
     ];
 
-    let questions = [...originalQuestions];
     let idx = 0;
     const answers = new Map();
 
-    const qArea = document.getElementById("qArea");
-    const barEl = document.getElementById("bar");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    const shuffleEl = document.getElementById("shuffle");
-    const modeBadge = document.getElementById("modeBadge");
-    const progressMeta = document.getElementById("progressMeta");
+    function updateProgress(){
+      const total = questions.length;
+      document.getElementById("bar").style.width = ((idx+1) / total * 100) + "%";
+      document.getElementById("progressMeta").innerHTML = `<div>問題：${idx + 1} / ${total}</div><div>回答済み：${answers.size} / ${total}</div>`;
+      document.getElementById("prevBtn").disabled = (idx === 0);
+      document.getElementById("nextBtn").textContent = (idx === total - 1) ? "採点する" : "次へ";
+    }
 
-    const resultCard = document.getElementById("resultCard");
-    const resultBody = document
+    function renderQuestion(){
+      const q = questions[idx];
+      const ua = answers.get(q.id);
+      document.getElementById("qArea").innerHTML = `
+        <div class="qNo"><div>問題${idx + 1}</div><div class="badge">回答：${ua === undefined ? "未選択" : (ua ? "〇" : "×")}</div></div>
+        <p class="qText">${q.text}</p>
+        <div class="choices">
+          <button class="choiceBtn ${ua === true ? 'selected' : ''}" onclick="setAns(true)">〇</button>
+          <button class="choiceBtn ${ua === false ? 'selected' : ''}" onclick="setAns(false)">×</button>
+        </div>
+      `;
+      updateProgress();
+    }
+
+    window.setAns = (val) => {
+      answers.set(questions[idx].id, val);
+      renderQuestion();
+    };
+
+    function showResults(){
+      document.getElementById("quizSection").style.display = "none";
+      document.getElementById("navArea").style.display = "none";
+      document.getElementById("appHeader").style.display = "none";
+      const section = document.getElementById("resultSection");
+      section.style.display = "block";
+
+      let correct = 0;
+      questions.forEach(q => { if(answers.get(q.id) === q.answer) correct++; });
+
+      const grades = [
+        { min: 15, label: "【特級】エグゼクティブ・リーダー", msg: "リーダーシップの本質を完璧に捉えています。<br>この高い視座を組織全体に浸透させ、さらなる高みを目指す強固な組織を構築するために、LOMメンバーをアカデミーに出向させよう！" },
+        { min: 12, label: "【1級】戦略的リーダー", msg: "状況に応じた卓越した判断力をお持ちです。<br>あなたの戦略を具現化し、共に組織を牽引する強力な次世代リーダーを育成するため、LOMメンバーをアカデミーに出向させよう！" },
+        { min: 10, label: "【2級】チームリーダー", msg: "リーダーとしての土台がしっかり築かれています。<br>個人の力から組織の力へとシフトし、チーム全体のポテンシャルを最大限に引き出す環境を作るため、LOMメンバーをアカデミーに出向させよう！" },
+        { min: 7, label: "【3級】リーダー候補生", msg: "大きな成長の可能性を秘めています。<br>まずは組織としての共通言語を学び、チーム一丸となって変革の一歩を踏み出すきっかけを作るため、LOMメンバーをアカデミーに出航させよう！" },
+        { min: 0, label: "【4級】要トレーニング", msg: "リーダーシップの再定義が必要です。<br>今のままでは組織の成長が止まってしまいます。意識の劇的な変革を促すため、LOMメンバーを地区やブロックのアカデミーへ絶対に出向させてください！" }
+      ];
+      const g = grades.find(x => correct >= x.min);
+      const highlightedMsg = g.msg.replace(/出向/g, '<span class="highlight">出向</span>');
+
+      document.getElementById("resultBody").innerHTML = `
+        <div class="scoreLine"><div class="score">${correct} <small>/ 15</small></div><div class="grade special">${g.label}</div></div>
+        <div class="summary">${highlightedMsg}</div>
+        <button class="ghostBtn" onclick="location.reload()">最初からやり直す</button>
+        <div style="margin-top:20px;">
+          ${questions.map(q => `
+            <details open>
+              <summary><span>問題${q.id}</span><span class="mark ${answers.get(q.id) === q.answer ? 'ok' : 'ng'}">${answers.get(q.id) === q.answer ? '正解' : '不正解'}</span></summary>
+              <div class="detailBody"><b>正解：${q.answer ? '〇' : '×'}</b><br>${q.explain}</div>
+            </details>
+          `).join('')}
+        </div>
+      `;
+      window.scrollTo(0,0);
+    }
+
+    document.getElementById("nextBtn").onclick = () => {
+      if(idx < questions.length - 1) { idx++; renderQuestion(); }
+      else { showResults(); }
+    };
+    document.getElementById("prevBtn").onclick = () => { if(idx > 0) { idx--; renderQuestion(); } };
+
+    renderQuestion();
+  </script>
+</body>
+</html>
