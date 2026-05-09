@@ -1,6 +1,6 @@
 const questions = [
   {
-    q: "チームが迷っているとき、あなたは？",
+    q: "チームが迷っているとき、あなたならどうしますか？",
     options: [
       { text: "進むべき方向を言葉で示す", type: "visionary" },
       { text: "一人ひとりと話し、成長点を探す", type: "coaching" },
@@ -11,7 +11,7 @@ const questions = [
     ]
   },
   {
-    q: "メンバーが失敗したとき、あなたは？",
+    q: "メンバーが失敗したとき、あなたならどうしますか？",
     options: [
       { text: "目的に立ち返らせる", type: "visionary" },
       { text: "次に活かす方法を一緒に考える", type: "coaching" },
@@ -22,7 +22,7 @@ const questions = [
     ]
   },
   {
-    q: "理想のリーダー像は？",
+    q: "理想のリーダー像はどのような人ですか？",
     options: [
       { text: "未来を語れる人", type: "visionary" },
       { text: "人を育てる人", type: "coaching" },
@@ -33,7 +33,7 @@ const questions = [
     ]
   },
   {
-    q: "あなたが一番イライラするのは？",
+    q: "あなたが一番イライラするのは、どのようなことですか？",
     options: [
       { text: "目的が見えない状態", type: "visionary" },
       { text: "成長の機会がないこと", type: "coaching" },
@@ -44,7 +44,7 @@ const questions = [
     ]
   },
   {
-    q: "強みを発揮しているときの自分は？",
+    q: "強みを発揮しているときのあなたは、どのような行動をとっていますか？",
     options: [
       { text: "ワクワクさせている", type: "visionary" },
       { text: "背中を押している", type: "coaching" },
@@ -52,6 +52,39 @@ const questions = [
       { text: "引き出している", type: "democratic" },
       { text: "先頭を走っている", type: "pacesetting" },
       { text: "まとめている", type: "commanding" }
+    ]
+  },
+  {
+    q: "新しいプロジェクトが始まるとき、あなたならどうしますか？",
+    options: [
+      { text: "「ワクワクする未来」を語る", type: "visionary" },
+      { text: "「個人のスキルアップ」を提案する", type: "coaching" },
+      { text: "「チームの親睦」を優先する", type: "affiliative" },
+      { text: "「進め方のアイデア」を募る", type: "democratic" },
+      { text: "「高い成果の基準」を設定する", type: "pacesetting" },
+      { text: "「役割と期限」を厳密に命じる", type: "commanding" }
+    ]
+  },
+  {
+    q: "会議を進めるとき、あなたが重視するのはどのようなことですか？",
+    options: [
+      { text: "情熱が目的地に向かっているか", type: "visionary" },
+      { text: "発言者に気づきがあるか", type: "coaching" },
+      { text: "険悪なムードになっていないか", type: "affiliative" },
+      { text: "全員の納得感が得られたか", type: "democratic" },
+      { text: "無駄なく最高の結果が出せるか", type: "pacesetting" },
+      { text: "決まったことが徹底されるか", type: "commanding" }
+    ]
+  },
+  {
+    q: "メンバーのモチベーションを上げたいとき、あなたならどうしますか？",
+    options: [
+      { text: "成功したときの報酬や名誉を説く", type: "visionary" },
+      { text: "将来のキャリアプランを語り合う", type: "coaching" },
+      { text: "ランチや飲み会で距離を縮める", type: "affiliative" },
+      { text: "役割を与えて責任感を持たせる", type: "democratic" },
+      { text: "自分の圧倒的な仕事量を見せる", type: "pacesetting" },
+      { text: "規律を正し、緊張感を持たせる", type: "commanding" }
     ]
   }
 ];
