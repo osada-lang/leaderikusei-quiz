@@ -276,8 +276,13 @@ function showResults() {
     }
   }
 
-  // If there's a tie, we sort by who reached the score earliest (optional, but requested to show both)
-  // Actually, user requested: "同点の場合は両方表示がいいですね". So we just show all in topTypes.
+  // 同点の場合は、より早い段階でポイントを獲得したタイプを優先する
+  topTypes.sort((a, b) => {
+    return firstReached[a][maxScore - 1] - firstReached[b][maxScore - 1];
+  });
+
+  // 1つだけ表示するため、先頭の1つに絞る
+  topTypes = [topTypes[0]];
 
   resultTypesContainer.innerHTML = '';
 
