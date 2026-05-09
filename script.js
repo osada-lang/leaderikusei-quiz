@@ -310,7 +310,9 @@ function showResults() {
     clone.querySelector('.era-needs').textContent = data.eraNeeds;
     clone.querySelector('.question-self').textContent = data.questionSelf;
     clone.querySelector('.trap').textContent = data.trap;
-    clone.querySelector('.jc-message').textContent = data.jcMessage;
+    
+    // 「出向」という文字をめちゃくちゃ派手に目立たせる
+    clone.querySelector('.jc-message').innerHTML = data.jcMessage.replace(/出向/g, '<span class="flashy-shukko">出向</span>');
 
     resultTypesContainer.appendChild(clone);
   });

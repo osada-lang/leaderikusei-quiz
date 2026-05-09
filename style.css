@@ -411,6 +411,24 @@ body {
   color: var(--text-light);
 }
 
+/* Flashy Shukko Animation */
+.flashy-shukko {
+  display: inline-block;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #FF0055;
+  text-shadow: 0 0 10px #FF0055, 0 0 20px #FF0055, 0 0 30px #FFAA00, 0 0 40px #FFAA00;
+  animation: explodePulse 0.8s infinite alternate;
+  margin: 0 8px;
+  transform-origin: center;
+  line-height: 1;
+}
+
+@keyframes explodePulse {
+  0% { transform: scale(1); text-shadow: 0 0 10px #FF0055, 0 0 20px #FF0055; }
+  100% { transform: scale(1.4) rotate(5deg); text-shadow: 0 0 20px #FFAA00, 0 0 40px #FF0055, 0 0 60px #FFAA00, 0 0 80px #FFFF00; color: #FFEB3B; }
+}
+
 @media (max-width: 480px) {
   .traits-grid {
     grid-template-columns: 1fr;
