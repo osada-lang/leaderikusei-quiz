@@ -221,8 +221,11 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-.option-btn:active {
-  transform: translateY(0);
+.option-btn:active, .option-btn.selected {
+  background: var(--primary) !important;
+  color: white !important;
+  border-color: var(--primary) !important;
+  transform: translateY(1px);
 }
 
 /* Loading */

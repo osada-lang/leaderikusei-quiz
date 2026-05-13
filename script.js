@@ -268,12 +268,18 @@ function showQuestion() {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
     btn.textContent = opt.text;
-    btn.onclick = () => selectOption(opt.type);
+    btn.onclick = (e) => selectOption(opt.type, e);
     optionsContainer.appendChild(btn);
   });
 }
 
-function selectOption(type) {
+function selectOption(type, event) {
+  // Remove focus from the clicked button to prevent color persisting on mobile/focus
+  if (event && event.target) {
+    event.target.blur();
+    event.target.classList.add('selected'); // Optional: show selection briefly
+  }
+  
   scores[type]++;
   if (!firstReached[type]) {
     firstReached[type] = [];
